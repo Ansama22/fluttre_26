@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-
 import 'note_screen.dart';
 
 class AddNewNoteScreen extends StatefulWidget {
