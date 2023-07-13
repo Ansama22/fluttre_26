@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttre_26/Notes/notes_login_screen.dart';
 import 'package:fluttre_26/Notes/notes_register_screen.dart';
+import 'package:fluttre_26/quiz%20app/quiz_login_screen.dart';
+import 'package:fluttre_26/quiz%20app/quiz_register_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:NotesRegisterScreen());
+      home:QuizRegisterScreen());
       //const MyHomePage(title: 'Flutter Demo Home Page'),
    // );
   }
