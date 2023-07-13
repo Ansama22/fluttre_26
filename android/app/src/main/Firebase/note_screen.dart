@@ -1,17 +1,19 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'edit_note_screen.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+
   await Firebase.initializeApp();
   runApp( MyApp());
 }
 
-class Firebase {
-  static initializeApp() {}
-}
+
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
@@ -112,6 +114,3 @@ class _NotesScreenState extends State<NotesScreen> {
     );
   }}
 
-class FirebaseFirestore {
-  static var instance;
-}
