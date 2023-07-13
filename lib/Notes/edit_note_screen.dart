@@ -1,23 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class AddNewNoteScreen extends StatefulWidget {
-  const AddNewNoteScreen({Key? key}) : super(key: key);
+class EditNoteScreen extends StatefulWidget {
+  EditNoteScreen({
+    Key? key,
+    required this.note,
+    required this.id,
+  }) : super(key: key);
+
+  final String note;
+  final String id;
 
   @override
-  State<AddNewNoteScreen> createState() => _AddNewNoteScreenState();
+  State<EditNoteScreen> createState() => _EditNoteScreenState();
 }
 
-class _AddNewNoteScreenState extends State<AddNewNoteScreen> {
+class _EditNoteScreenState extends State<EditNoteScreen> {
   final noteController = TextEditingController();
 
-  final firestore = FirebaseFirestore.instance;
+  @override
+  void initState() {
+    super.initState();
+    noteController.text = widget.note;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add new note"),
+        title: const Text("Edit note"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15),
@@ -35,8 +46,8 @@ class _AddNewNoteScreenState extends State<AddNewNoteScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
-                onPressed: () => addNote(),
-                child: const Text("Add"),
+                onPressed: () => updateNote(),
+                child: const Text("Update"),
               ),
             ),
           ],
@@ -45,22 +56,17 @@ class _AddNewNoteScreenState extends State<AddNewNoteScreen> {
     );
   }
 
-  addNote() {
+  updateNote() {
     String note = noteController.text;
 
-    // Map<String, dynamic> => key : value
-    // "id" : 1
-    // "note" : "Wake up"
-    // "favourite" : false
-
-    String currentMillis = DateTime.now().millisecondsSinceEpoch.toString();
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     Map<String, dynamic> data = {
-      "id": currentMillis,
       "note": note,
     };
 
-    firestore.collection("notes").doc(data['id']).set(data);
-    Navigator.pop(context);
+    firestore.collection("notes").doc(widget.id).update(data);
+
+    Navigator.pop(context, note);
   }
 }

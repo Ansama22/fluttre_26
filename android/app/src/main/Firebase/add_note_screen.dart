@@ -1,8 +1,5 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-import 'note_screen.dart';
 
 class AddNewNoteScreen extends StatefulWidget {
   const AddNewNoteScreen({Key? key}) : super(key: key);
@@ -64,6 +61,6 @@ class _AddNewNoteScreenState extends State<AddNewNoteScreen> {
     };
 
     firestore.collection("notes").doc(data['id']).set(data);
-    Navigator.pop(context);
+    Navigator.pop(context,note);
   }
 }
